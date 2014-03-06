@@ -6,7 +6,7 @@
 		
               <!-- .site-title -->
               <hgroup>
-                <h1 class="site-title"> <a href="{{ url('/') }}" rel="home"><img src="{{ asset('images/logo.png') }}" alt="koonema logo"></a> </h1>
+                <h1 class="site-title"> <a href="{{ url('/') }}" title="koonema" rel="home"><img src="{{ asset('images/logo.png') }}" alt="koonema logo" title="koonema"></a> </h1>
                 <h2 class="site-description">rumahnya fans drama asia ;)</h2>
               </hgroup>
               <!-- .site-title --> 
@@ -45,10 +45,10 @@
               <!-- #site-navigation -->
               <nav id="site-navigation" class="main-navigation clearfix" role="navigation">
                 <ul>
-                  <li class="current-menu-item"><a href="{{ url('/') }}">Home</a></li>
-                  <li><a href="{{ url('dramas'); }}">Drama Lists</a></li>
-                  <li><a href="{{ url('joinus'); }}">Join Us</a></li>
-                  <li><a href="{{ url('contact'); }}">Contact</a></li>
+                  <li class="current-menu-item"><a href="{{ url('/') }}" title="koonema home">Home</a></li>
+                  <li><a href="{{ url('dramas'); }}" title="koonema list drama">Drama Lists</a></li>
+                  <li><a href="{{ url('joinus'); }}" title="koonema join us">Join Us</a></li>
+                  <li><a href="{{ url('contact'); }}" title="koonema contact">Contact</a></li>
                 </ul>
                 
                 <a id="header-search-link" title="Search"></a>
