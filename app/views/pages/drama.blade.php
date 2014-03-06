@@ -20,7 +20,7 @@
                                 <!-- .entry-header -->
                                 <header class="entry-header">
                                     <h1 class="entry-title">
-                                        <a href="{{ url('view/'.$row['slugtitle']) }}" title="{{ $row['title'] }}" rel="bookmark">{{ $row['title'] }}</a>
+                                        <a href="{{ url('drama/'.$row['slugtitle']) }}" title="{{ $row['title'] }}" rel="bookmark">{{ $row['title'] }}</a>
                                     </h1>
                                 </header>
                                 <!-- .entry-header -->
@@ -39,7 +39,7 @@
                                 <!-- .entry-content -->     
                                 <div class="entry-content">
                                     <p>{{ strip_tags(Str::words($row['description'], $words = 20, $end = '...') ) }}
-                                    <a href="{{ url('view/'.$row['slugtitle']) }}" title="{{ $row['title'] }}" class="more-link">Continue reading <span class="meta-nav">→</span></a></p>
+                                    <a href="{{ url('drama/'.$row['slugtitle']) }}" title="{{ $row['title'] }}" class="more-link">Continue reading <span class="meta-nav">→</span></a></p>
                                 </div>
                                 <!-- .entry-content -->
                                 

@@ -48,14 +48,17 @@
                         <!-- BLOG MASONRY -->
                         @if(isset($next_offset))
 
-                        @if($current_offset < $posts->getLastPage())
-                        <!-- post nav -->
-                        <nav class="navigation" role="navigation">
-                            <div class="nav-previous"><a href="{{ '?page='.$next_offset }}"><span class="meta-nav">←</span> Older posts</a></div>
-                        </nav>
-                        <!-- post nav -->
-                        @endif
+                            @if($current_offset < $posts->getLastPage())
+                            <!-- post nav -->
+                            <nav class="navigation" role="navigation">
+                                <div class="nav-previous"><a href="{{ '?page='.$next_offset }}"><span class="meta-nav">←</span> Older posts</a></div>
+                            </nav>
+                            <!-- post nav -->
+                            @endif
 
-                        @else
+                        @elseif(Request::segment(1) == "search")
                             {{ $posts->appends(array('s'=>Input::get('s')))->links() }}
+
+                        @elseif(Request::segment(1) == "drama")
+                            {{ $posts->links() }}
                         @endif

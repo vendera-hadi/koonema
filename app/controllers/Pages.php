@@ -44,7 +44,7 @@ class Pages extends BaseController {
 		//tampung key
 		$keyword = Input::get('s');
 		//ambil 9 posting terbaru by keyword
-		$data['posts'] = Post::orderBy('id', 'DESC')->where('title', 'LIKE', '%'.$keyword.'%')->paginate(9);
+		$data['posts'] = Post::orderBy('id', 'DESC')->where('title', 'LIKE', '%'.$keyword.'%')->paginate(1);
 
 		//isi konten tengah
 		$view = View::make('pages.home',$data);
@@ -66,7 +66,7 @@ class Pages extends BaseController {
 	}
 
 	//halaman drama
-	public function drama()
+	public function dramas()
 	{
 		//tampung keyword
 		$keyword = Input::get('k');
@@ -140,9 +140,10 @@ class Pages extends BaseController {
 		$this->layout->keyword = $this->layout->keyword.$add_keyword;
 	}
 
+	//post detail
 	public function view($slug)
 	{
-		//data
+		//get post detail
 		$data['post'] = Post::where('slugtitle', '=', $slug)->firstOrFail();
 		$data['keywords'] = explode(",",$data['post']['keywords']);
 		$data['related_posts'] = Post::where('drama_id','=',$data['post']['drama_id'])
@@ -157,6 +158,32 @@ class Pages extends BaseController {
 		$this->layout->title = "Koonema - Rumahnya Fans Drama Asia";
 		$this->layout->description = "Koonema Rumahnya Drama Asia, tonton streaming drama korea, download subtitle indonesia drama korea, update drama korea terbaru,";
 		$this->layout->keyword = "download subtitle indonesia,drama korea,drama terbaru,";
+	}
+
+	//posts yang dipunyai sebuah drama 
+	public function drama($slug)
+	{
+		//ambil 9 posting terbaru by keyword
+		$drama = Drama::where('slugtitle','=',$slug)->first();
+		$data['posts'] = Post::where('drama_id','=',$drama['id'])->paginate(1);
+
+		//isi konten tengah
+		$view = View::make('pages.home',$data);
+		$this->layout->content = $view;
+
+		//title, meta tags, meta desc
+		$this->layout->title = "Koonema - Search '".$slug."' - Rumahnya Fans Drama Asia";
+		$this->layout->description = "Koonema Rumahnya Drama Asia, tonton streaming drama korea, download subtitle indonesia drama korea, update drama korea terbaru,";
+		$this->layout->keyword = "download subtitle indonesia,drama korea,drama terbaru,";
+
+		//tambahan keyword post pencarian
+		$add_keyword = array();
+		foreach ($data['posts'] as $post) {
+			array_push($add_keyword, $post['title']);
+		}
+		$add_keyword = implode(",", $add_keyword);
+		$this->layout->description = $this->layout->description.$add_keyword;
+		$this->layout->keyword = $this->layout->keyword.$add_keyword;
 	}
 
 
