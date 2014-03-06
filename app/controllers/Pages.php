@@ -140,5 +140,24 @@ class Pages extends BaseController {
 		$this->layout->keyword = $this->layout->keyword.$add_keyword;
 	}
 
+	public function view($slug)
+	{
+		//data
+		$data['post'] = Post::where('slugtitle', '=', $slug)->firstOrFail();
+		$data['keywords'] = explode(",",$data['post']['keywords']);
+		$data['related_posts'] = Post::where('drama_id','=',$data['post']['drama_id'])
+								->where('id','!=',$data['post']['id'])->orderBy('id','DESC')
+								->take(5)->get();
+
+		//isi konten tengah
+		$view = View::make('pages.post',$data);
+		$this->layout->content = $view;
+
+		//title, meta tags, meta desc
+		$this->layout->title = "Koonema - Rumahnya Fans Drama Asia";
+		$this->layout->description = "Koonema Rumahnya Drama Asia, tonton streaming drama korea, download subtitle indonesia drama korea, update drama korea terbaru,";
+		$this->layout->keyword = "download subtitle indonesia,drama korea,drama terbaru,";
+	}
+
 
 }
