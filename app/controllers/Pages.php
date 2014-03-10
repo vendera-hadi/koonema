@@ -145,10 +145,15 @@ class Pages extends BaseController {
 	{
 		//get post detail
 		$data['post'] = Post::where('slugtitle', '=', $slug)->firstOrFail();
+		//potong setiap keywords
 		$data['keywords'] = explode(",",$data['post']['keywords']);
+		//related post
 		$data['related_posts'] = Post::where('drama_id','=',$data['post']['drama_id'])
 								->where('id','!=',$data['post']['id'])->orderBy('id','DESC')
 								->take(5)->get();
+		//get link sub&vid dr post
+		$data['sub'] = $data['post']->links()->where('name','=','subtitle')->first();
+		$data['vid'] = $data['post']->links()->where('name','=','dailymotion')->first();
 
 		//isi konten tengah
 		$view = View::make('pages.post',$data);
@@ -184,6 +189,18 @@ class Pages extends BaseController {
 		$add_keyword = implode(",", $add_keyword);
 		$this->layout->description = $this->layout->description.$add_keyword;
 		$this->layout->keyword = $this->layout->keyword.$add_keyword;
+	}
+
+	public function error()
+	{
+		//isi konten tengah
+		$view = View::make('errors.missing');
+		$this->layout->content = $view;
+
+		//title, meta tags, meta desc
+		$this->layout->title = "Koonema - List Drama - Rumahnya Fans Drama Asia";
+		$this->layout->description = "Koonema Rumahnya Drama Asia, tonton streaming drama korea, download subtitle indonesia drama korea, update drama korea terbaru,";
+		$this->layout->keyword = "download subtitle indonesia,drama korea,drama terbaru,";
 	}
 
 

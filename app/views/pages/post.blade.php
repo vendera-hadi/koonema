@@ -106,9 +106,12 @@
           
                                     <!-- .project-action -->
                                     <div class="project-action row-fluid">
-                                        <a href="#" class="button big navy d3 button-icon"><i class="icon-download"></i>DOWNLOAD SUB</a>
-                                        <a href="#" class="button big yellow d3 button-icon"><i class="icon-eye-open"></i>STREAMING</a>
-                                        
+                                        @if($sub != NULL)
+                                        <a href="{{ $sub['url'] }}" class="button big navy d3 button-icon"><i class="icon-download"></i>DOWNLOAD SUB</a>
+                                        @endif
+                                        @if($vid != NULL)
+                                        <a href="{{ $vid['url'] }}" class="button big yellow d3 button-icon"><i class="icon-eye-open"></i>STREAMING</a>
+                                        @endif
                                     </div>
                                     <!-- .project-action -->
                                     

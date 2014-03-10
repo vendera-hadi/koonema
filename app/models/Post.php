@@ -10,4 +10,9 @@ class Post extends Eloquent {
     {
         return $this->belongsTo('Drama','drama_id');
     }
+
+    public function links()
+    {
+    	return $this->hasMany('Link');
+    }
 }

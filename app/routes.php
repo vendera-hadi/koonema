@@ -52,6 +52,10 @@ Route::post('contact',array('before'=>'csrf',function(){
 
 }));
 
+//404 error front end
+Route::get('error404','Pages@error');
+
+
 Route::get('test/{slugtitle}',function($slug){
     $post = Drama::find(1)->posts()->paginate(1);
 
